@@ -9,11 +9,14 @@
             box-sizing: border-box;
             margin: 0 auto;
         }
+        body{
+            transition: 0.5s;
+        }
 
         #greeting{
             padding: 10px;
             font-size: 2.3em;
-            width: fit-content;
+            width: fit-content; 
             margin: 0 auto;
         }
 
@@ -27,23 +30,118 @@
             display: flex;
             width: 95%;
             border-radius: 10px;
-            height: 65vh;
+            height: 55vh;
             border: 2px solid black;
+            padding: 20px;
+            gap: 10px;
         }
-    </style>
+        .theme{
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+            margin: 0 auto;
+        }
+        .modify{
+            display: flex;
+            margin: 10px;
+        }
+        .addPopUp{
+            position: absolute;
+            width:100%;
+            height: 100%;
+            background-color: wheat;
+            background: rgba(0, -0, 0,0.5);
+            display: flex;
+            /* display: none; */
+            justify-content: center;
+            align-items: center;
+        }
+        .popUp{
+            background-color: white;
+        }
+        .timer{
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* CSS for dark theme*/
+        .dark{
+            color: white;
+            background-color: black;
+
+            .itemBox{
+                border: white solid 2px;
+            }
+
+            .display{
+                border: white solid 2px;
+            }
+
+            button{
+                color: white;
+                background-color: grey;
+            }
+        }
+
+
+        /* CSS for item display*/
+        .itemBox{
+            width: 20%;
+            border: black solid 2px;
+            padding: 0 13px 0 13px;
+            margin: unset;
+        }
+        .name{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: space-around;
+            text-align: center;
+            height: 100%;
+        }
+        .infoTxt{
+            display: flex;
+            justify-content: space-between;
+        }
+        </style>
 </head>
 <body>
-    <h1 id="greeting">Hello, User</h1>
+    <div class="addPopUp">
+            <div class="popUp">
+                <h1>this is a pop up</h1>
+            </div>
+    </div>
+    <h1 id="greeting">Hello,<span id="user"></span></h1>
     <h3 style="text-align: center; font-size: 1.3em; padding-top: 10px;">ForestWell food inventory management system</h6>
     <div class="search">    
         <div>
             <label for="searchBar">Search</label>
             <input type="text" id="searchBar">
         </div>
-
     </div>
-    <div class="display">
 
+    <div class="modify">
+        <button>ADD</button>
+        <button>FILTER</button>
+    </div>
+
+    <div class="display" id="display">
+
+    
+    </div> <!--End of display container-->
+</div>
+    <div class="theme">
+        <label for="themeSwitch" style="text-align: center;">Current theme: Light<span id="currentTheme"></span></label>
+        <br>
+        <button id="themeBtn">switch</button>
+    </div>
+    <div class="timer">
+        <h2 id="timer"></h2>
     </div>
 </body>
 </html>
+<script src="food.js"></script>
+<!-- <script defer src="greeting.js"></script> -->
+<script src="theme.js"></script>
+<script defer src="timer.js"></script>
