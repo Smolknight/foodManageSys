@@ -26,22 +26,10 @@
         }
     ]
 
-    class invItem{
-        constructor(name,SKU,quantity,group,parLvl){
-            this.id=items.length+1
-            this.name=name
-            this.SKU=SKU
-            this.quantity=quantity
-            this.group=group
-            this.parLvl=parLvl
-        }
-    }
-
     const displayBox=document.getElementById("display")
+    const searchBar=document.getElementById('searchBar')
 
-    displayItem(items)
-
-function displayItem(currentList){
+function displayItem(currentList){ //div assembly 
     currentList.forEach((item)=>{
         var box=document.createElement("div")
         box.className="itemBox" //creates the box that holds item info and assigns css class
@@ -93,4 +81,24 @@ function displayItem(currentList){
         parDiv.appendChild(parTxt)
     })
 }
+search()
+function search(){
+    let searchTerm=searchBar.value.toLowerCase().trim()
+    let filteredList=[]
+    displayBox.innerHTML=``
 
+    for(let i=0;i<items.length;i++){
+        if(items[i].name.toLowerCase()==searchTerm || items[i].SKU.toLowerCase()==searchTerm){
+            filteredList.push(items[i])
+        }else if(items[i].name.toLowerCase().includes(searchTerm) || items[i].SKU.toLowerCase().includes(searchTerm)){
+            filteredList.push(items[i])
+        }
+    }
+    displayItem(filteredList)
+}
+
+searchBar.addEventListener('keyup',function(e){
+    if(e.key==='Enter'){
+        search()
+    }
+})
