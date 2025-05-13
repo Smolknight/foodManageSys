@@ -10,6 +10,14 @@
         },
         {
             "id":2,
+            "name":'pears',
+            "SKU":"FR-PEAR-GR",
+            "quantity":300,
+            "group":'fruit',
+            "parLvl":100    
+        },
+        {
+            "id":3,
             "name":"gallon of full milk",
             "SKU":"MLK-FULL-1G",
             "quantity":60,
@@ -17,7 +25,15 @@
             "parLvl":20
         },
         {
-            "id":3,
+            "id":4,
+            "name":'carton of soy milk',
+            "SKU":'MLK-SOY-CART',
+            "quantity":20,
+            "group":'dairy',
+            'parLvl':10
+        },
+        {
+            "id":5,
             "name":"eggs",
             "SKU":"EGG-12-GA",
             "quantity":100,
@@ -40,12 +56,12 @@ function displayItem(currentList){ //div assembly
         box.appendChild(name) //creates the div that holds names aand appends it as a child of itemBox
 
         var productDiv=document.createElement('div')
-        productDiv.className='infoTxt'
-        name.appendChild(productDiv)
+        productDiv.className='infoTxt' 
+        name.appendChild(productDiv)  //creates a div to contain product name
 
         var productTxt=document.createElement('p')
         productTxt.innerText=`Product Name: \n ${item.name}`
-        productDiv.appendChild(productTxt)
+        productDiv.appendChild(productTxt) //inserts the product's name into the previous div
 
         var SKUdiv=document.createElement('div')
         SKUdiv.className="infoTxt"
@@ -81,24 +97,25 @@ function displayItem(currentList){ //div assembly
         parDiv.appendChild(parTxt)
     })
 }
-search()
-function search(){
-    let searchTerm=searchBar.value.toLowerCase().trim()
-    let filteredList=[]
-    displayBox.innerHTML=``
+search() //displays all the items
+function search(){ //takes user input and displays products who's info matches user's search
+    let searchTerm=searchBar.value.toLowerCase().trim() //grabs the search term, removing extra spaces and setting it ot lowerCase
+    let filteredList=[] //stores items that matches search parameter
+    displayBox.innerHTML=`` //erases previously displayed items. Only displaying current results
 
-    for(let i=0;i<items.length;i++){
-        if(items[i].name.toLowerCase()==searchTerm || items[i].SKU.toLowerCase()==searchTerm){
-            filteredList.push(items[i])
-        }else if(items[i].name.toLowerCase().includes(searchTerm) || items[i].SKU.toLowerCase().includes(searchTerm)){
+    for(let i=0;i<items.length;i++){ //searches through the array of items
+        if(items[i].name.toLowerCase().includes(searchTerm) || items[i].SKU.toLowerCase().includes(searchTerm)){ //checks if the search term matches any substring of item names or SKU code. user's search doesn't need to exactly match item names or SKU
+            filteredList.push(items[i]) //pushes items that match
+        }else if(items[i].group.toLowerCase().includes(searchTerm)){ //allows user to search by group. If they search dairy, it'll display every item under dairy
             filteredList.push(items[i])
         }
     }
-    displayItem(filteredList)
+
+    displayItem(filteredList) //displays end results
 }
 
-searchBar.addEventListener('keyup',function(e){
-    if(e.key==='Enter'){
+searchBar.addEventListener('keyup',function(e){ //listens when user types in search bar
+    if(e.key==='Enter'){  //only submits when user presses the enter key
         search()
     }
 })
