@@ -7,7 +7,7 @@ let time={
 let seconds=time.seconds
 let minutes=time.minutes
 let hours=time.hours
-setInterval(function(){
+let timer=setInterval(function(){
     seconds++
     time.seconds=seconds
     if(minutes==60){
@@ -36,3 +36,6 @@ function displayTime(){
     }
 }
 
+window.addEventListener('beforeunload',()=>{
+    clearInterval(timer)
+})

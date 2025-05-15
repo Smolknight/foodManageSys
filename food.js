@@ -1,15 +1,15 @@
 
-const itemList=JSON.parse(itemData)
-let historyList=[]
+const itemList=JSON.parse(itemData) //retrieves JSON data
+let historyList=[] //array used to store search history
 
-    const displayBox=document.getElementById("display")
-    const searchBar=document.getElementById('searchBar')
-    const displayHistory=document.getElementById('displayHistory')
+    const displayBox=document.getElementById("display") //grabs the div where search results are displayed
+    const searchBar=document.getElementById('searchBar') //grabs the search bar
+    const displayHistory=document.getElementById('displayHistory') //grabs the area where search history is displayed
 
-function displayItem(currentList){ //div assembly 
-    currentList.forEach((item)=>{
-        var box=document.createElement("div")
-        box.className="itemBox" //creates the box that holds item info and assigns css class
+function displayItem(currentList){ //div assembly function, displays items from passed argument
+    currentList.forEach((item)=>{ //forEach loop goes through every item in array
+        var box=document.createElement("div") //creates the primary div
+        box.className="itemBox" //assigns the primary div its class
         displayBox.appendChild(box) //appends the item box to display area
 
         var name=document.createElement("div") // creates div that controls how info is displayed
@@ -17,17 +17,18 @@ function displayItem(currentList){ //div assembly
         box.appendChild(name) //appends name info as a child of itemBox
 
         var productDiv=document.createElement('div') //creates a div to contain product name
-        productDiv.className='infoTxt' 
-        name.appendChild(productDiv)  
+        productDiv.className='infoTxt' //assigns a class dedicated to info display
+        name.appendChild(productDiv)   //appends this div to itemBox
 
-        var productTxt=document.createElement('p')
-        productTxt.innerText=`Product Name: \n ${item.name}`
+        var productTxt=document.createElement('p') //creates the <p> that displays product name
+        productTxt.innerText=`Product Name: \n ${item.name}` //sets the text to product name
         productDiv.appendChild(productTxt) //inserts the product's name into the previous div
 
         var SKUdiv=document.createElement('div')
         SKUdiv.className="infoTxt"
         name.appendChild(SKUdiv)
 
+        //this cycle repeats for every other category
 
         var SKUtxt=document.createElement('p')
         SKUtxt.innerText=`SKU: ${item.SKU}`
@@ -58,11 +59,11 @@ function displayItem(currentList){ //div assembly
         parDiv.appendChild(parTxt)
     })
 }
-search() //displays all the items
+search() //search function called to display all items when page is loaded
 
 function search(){ //takes user input and displays products who's info matches user's search
-    let searchTerm = searchBar.value.toLowerCase().trim() //grabs the search term, removing extra spaces and setting it ot lowerCase
-    saveSearch(searchTerm)
+    let searchTerm = searchBar.value.toLowerCase().trim() //grabs the search term, removing extra spaces and setting letters to lowerCase
+    saveSearch(searchTerm)//calls the search history and passes word as an argument
     let filteredList = [] //stores items that matches search parameter
     displayBox.innerHTML = `` //erases previously displayed items. Only displaying current results
 
@@ -70,11 +71,11 @@ function search(){ //takes user input and displays products who's info matches u
         if(items[i].name.toLowerCase().includes(searchTerm) || items[i].SKU.toLowerCase().includes(searchTerm)){ //checks if the search term matches any substring of item names or SKU code. user's search doesn't need to exactly match item names or SKU, ex. searching app will return any term that has app
             filteredList.push(items[i]) //pushes items that match
         }else if(items[i].group.toLowerCase().includes(searchTerm)){ //allows user to search by group. If they search dairy, it'll display every item under dairy
-            filteredList.push(items[i])
+            filteredList.push(items[i]) 
         }
     }
 
-    displayItem(filteredList) //displays search results
+    displayItem(filteredList) //passes array of filtered items as an argument for rendering
 }
 
 searchBar.addEventListener('keyup',function(e){ //listens when user types in search bar
@@ -84,28 +85,26 @@ searchBar.addEventListener('keyup',function(e){ //listens when user types in sea
 })
 
 
-function saveSearch(term){
-    if(!historyList.includes(term) && term!=""){
-        historyList.push(term)
-        if(historyList.length==5){
-            historyList.splice(0,1)
+function saveSearch(term){ //used to save words to search history
+    if(!historyList.includes(term) && term!=""){ //checks if the word is already in list and not blank before saving
+        historyList.push(term) //inserts the word to the search history array
+        if(historyList.length==5){ //checks if the array has five elements
+            historyList.splice(0,1) //removes the first element from the array once the list reaches five elements
         }
     }
-
-    console.log(historyList)
-    renderHistory(historyList)
+    renderHistory(historyList) //calls the function in charge of displaying search history
 }
 
-function renderHistory(list){
-    displayHistory.innerHTML=[]
-    historyList.forEach((word)=>{
-        let wordDisplay=document.createElement('p')
-        wordDisplay.className='historyWord'
+function renderHistory(list){  //function in charge of rendering search history
+    displayHistory.innerHTML=[] //clears list before updating
+    historyList.forEach((word)=>{ //goes through the entire lsit
+        let wordDisplay=document.createElement('p') //creates a <p> for the words
+        wordDisplay.className='historyWord' //assigns css class dedicated for search history
         wordDisplay.innerText=word
-        displayHistory.appendChild(wordDisplay)
-        wordDisplay.addEventListener('click',function(e){
-        searchBar.value=e.currentTarget.innerText
-        search()
+        displayHistory.appendChild(wordDisplay) //adds it to the display area
+        wordDisplay.addEventListener('click',function(e){ //attaches event listener for every word
+        searchBar.value=e.currentTarget.innerText //inserts the clicked word into search bar
+        search() //runs the search
         })
     })
 }
