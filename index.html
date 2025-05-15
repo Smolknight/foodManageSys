@@ -8,6 +8,7 @@
         *,::before,::after{
             box-sizing: border-box;
             margin: 0 auto;
+            padding: 0;
         }
         body{
             transition: 0.5s;
@@ -64,22 +65,41 @@
             text-align: center;
             padding: 10px;
         }
+        .recentSearch{
+            p{
+                font-size: 1.3em;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+        
+        #displayHistory{
+            display: flex;
+        }
+        .historyWord{
+            width: fit-content;
+            color: wheat;
+        }
+
 
         /* CSS for dark theme*/
+        :root{
+            --bgBoardTxt-color: white;
+        }
         .dark{
-            color: white;
+            color: var(--bgBoardTxt-color);
             background-color: black;
 
             .itemBox{
-                border: white solid 2px;
+                border: var(--bgBoardTxt-color) solid 2px;
             }
 
             .display{
-                border: white solid 2px;
+                border: var(--bgBoardTxt-color) solid 2px;
             }
 
             button{
-                color: white;
+                color: var(--bgBoardTxt-color);
                 background-color: grey;
             }
         }
@@ -111,7 +131,7 @@
         </style>
 </head>
 <body>
-
+<header>
     <h1 id="greeting">Hello,<span id="user"></span></h1>
     <h3 style="text-align: center; font-size: 1.3em; padding-top: 10px;">ForestWell food inventory management system</h6>
     <div class="search">    
@@ -121,11 +141,18 @@
             <button onclick="search()">search</button>
         </div>
     </div>
+    <div class="recentSearch">
+        <p id="searchHistory">recent searches:</p>
+        <div id="displayHistory"></div>
+    </div>
+</header>
 
 
     <div class="display" id="display">    
     </div> <!--End of display container-->
 </div>
+
+<footer>
     <div class="theme">
         <label for="themeSwitch" style="text-align: center;">Current theme: Light<span id="currentTheme"></span></label>
         <br>
@@ -134,9 +161,11 @@
     <div class="timer">
         <h2 id="timer">time spent on system: 0 second(s)</h2>
     </div>
+</footer>
 </body>
 </html>
-<!-- <script src="food.js"></script> -->
+<script src="inventoryJSON.js"></script>
+<script src="food.js"></script>
 <!-- <script defer src="greeting.js"></script> -->
 <script src="theme.js"></script>
 <script defer src="timer.js"></script>

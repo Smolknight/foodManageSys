@@ -16,7 +16,7 @@ themeToggle.addEventListener('click',function(){
     
 })
 
-document.addEventListener('keydown',function(e){
+document.addEventListener('keyup',function(e){
     if(e.shiftKey && e.key==='D'){
         themeToggle.click()
     }
