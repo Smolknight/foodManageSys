@@ -7,3 +7,5 @@
 - [Data Management](#data-management)
 - [Event Handling](#event-handling)
 - [Event Flow](#event-flow)
+
+## HTML Structure
