@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ForestWell food management system">
     <title>Food management</title>
     <style>
         *,::before,::after{
@@ -10,10 +11,11 @@
             margin: 0 auto;
             padding: 0;
         }
-        body{
+        body{ /* adds transition to body for when theme switches*/
             transition: 0.5s;
         }
 
+        /*style for greeting message*/
         #greeting{
             padding: 10px;
             font-size: 2.3em;
@@ -21,12 +23,14 @@
             margin: 0 auto;
         }
 
+        /*style for search bar*/
         .search{
             display: flex;
             width: 90%;
             height: 10vh;
             align-items: center;
         }
+        /*Style for display box*/
         .display{
             display: flex;
             width: 95%;
@@ -36,6 +40,7 @@
             padding: 20px;
             gap: 10px;
         }
+        /* style for div that contains the theme switch btn*/
         .theme{
             width: fit-content;
             display: flex;
@@ -43,28 +48,12 @@
             padding-top: 10px;
             margin: 0 auto;
         }
-        .modify{
-            display: flex;
-            margin: 10px;
-        }
-        .addPopUp{
-            position: absolute;
-            width:100%;
-            height: 100%;
-            background-color: wheat;
-            background: rgba(0, -0, 0,0.5);
-            display: flex;
-            /* display: none; */
-            justify-content: center;
-            align-items: center;
-        }
-        .popUp{
-            background-color: white;
-        }
+        /*Style for timer display*/
         .timer{
             text-align: center;
             padding: 10px;
         }
+        /*Style for search history display only applying to <p>*/
         .recentSearch{
             p{
                 font-size: 1.3em;
@@ -72,10 +61,11 @@
                 margin-bottom: 10px;
             }
         }
-        
+        /*style for search history div*/
         #displayHistory{
             display: flex;
         }
+        /*Style for the words in search history*/
         .historyWord{
             width: fit-content;
             color: black;
@@ -84,14 +74,16 @@
 
 
         /* CSS for dark theme*/
+        /* variable used for background color, border color and text color  in dark mode*/
         :root{
             --bgBoardTxt-color: white;
         }
-        .dark{
+        /*style that controls what dark mode is*/
+        .dark{ 
             color: var(--bgBoardTxt-color);
             background-color: black;
 
-            .itemBox{
+            .itemBox{ 
                 border: var(--bgBoardTxt-color) solid 2px;
             }
 
@@ -110,19 +102,14 @@
         }
         }
 
-        #msg{
-            justify-self: center;
-            align-self: center;
-        }
-
         /* CSS for item display*/
-        .itemBox{
+        .itemBox{ /*style for the box that holds item info*/
             width: 20%;
             border: black solid 2px;
             padding: 0 13px 0 13px;
             margin: unset;
         }
-        .name{
+        .name{ /*style that controls how item info is displayed*/
             display: flex;
             flex-direction: column;
             justify-content: space-around;
@@ -130,7 +117,7 @@
             text-align: center;
             height: 100%;
         }
-        .infoTxt{
+        .infoTxt{ /*style that controls how each line of item info is displyed*/
             display: flex;
             justify-content: space-between;
         }
