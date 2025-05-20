@@ -1,6 +1,6 @@
 
-const itemList=JSON.parse(itemData) //retrieves JSON data
-let historyList=[] //array used to store search history
+const itemList = JSON.parse(itemData) //retrieves JSON data
+let historyList = [] //array used to store search history
 
     const displayBox=document.getElementById("display") //grabs the div where search results are displayed
     const searchBar=document.getElementById('searchBar') //grabs the search bar
@@ -96,14 +96,14 @@ function saveSearch(term){ //used to save words to search history
 }
 
 function renderHistory(list){  //function in charge of rendering search history
-    displayHistory.innerHTML=[] //clears list before updating
+    displayHistory.innerHTML = [] //clears list before updating
     historyList.forEach((word)=>{ //goes through the entire lsit
-        let wordDisplay=document.createElement('p') //creates a <p> for the words
-        wordDisplay.className='historyWord' //assigns css class dedicated for search history
-        wordDisplay.innerText=word
+        let wordDisplay = document.createElement('p') //creates a <p> for the words
+        wordDisplay.className = 'historyWord' //assigns css class dedicated for search history
+        wordDisplay.innerText = word
         displayHistory.appendChild(wordDisplay) //adds it to the display area
         wordDisplay.addEventListener('click',function(e){ //attaches event listener for every word
-        searchBar.value=e.currentTarget.innerText //inserts the clicked word into search bar
+        searchBar.value = e.currentTarget.innerText //inserts the clicked word into search bar
         search() //runs the search
         })
     })
